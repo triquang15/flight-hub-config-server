@@ -1,0 +1,10 @@
+server:
+  port: 8087
+
+spring:
+  datasource:
+    # NEON POSTGRESQL (PRODUCTION / CLOUD)
+    url: jdbc:postgresql://ep-silent-darkness-aoh21u1p-pooler.c-2.ap-southeast-1.aws.neon.tech/airline_pricing_db?sslmode=require
+    username: neondb_owner
+    password: npg_FDqZpbe3Oml7
+    driver-class-name: org.postgresql.Driver

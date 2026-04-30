@@ -1,5 +1,5 @@
 # =============================================================================
-# SHARED DEFAULT CONFIG (applied to ALL microservices)
+# SHARED CONFIG (applied to ALL services)
 # =============================================================================
 
 eureka:
@@ -12,16 +12,3 @@ spring:
     hibernate:
       ddl-auto: update   # dev only (prod: validate)
     show-sql: false
-
-# Logging (rất nên có)
-logging:
-  level:
-    root: INFO
-    org.springframework: INFO
-
-# Management (health check)
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, info
