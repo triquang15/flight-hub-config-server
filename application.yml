@@ -1,0 +1,27 @@
+# =============================================================================
+# SHARED DEFAULT CONFIG (applied to ALL microservices)
+# =============================================================================
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update   # dev only (prod: validate)
+    show-sql: false
+
+# Logging (rất nên có)
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+
+# Management (health check)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
