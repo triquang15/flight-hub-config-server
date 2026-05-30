@@ -9,7 +9,13 @@ spring:
     driver-class-name: ${FLIGHT_OPS_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
 
   kafka:
-    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${FLIGHT_OPS_KAFKA_BOOTSTRAP_SERVERS:${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}}
     producer:
+      acks: all
+      retries: 3
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+
+kafka:
+  topics:
+    flight-instance-created: ${KAFKA_TOPIC_FLIGHT_INSTANCE_CREATED:flight-instance-created}

@@ -9,11 +9,16 @@ spring:
     driver-class-name: ${SEAT_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
 
   kafka:
-    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${SEAT_KAFKA_BOOTSTRAP_SERVERS:${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}}
     consumer:
-      group-id: seat-service-group
+      group-id: ${SEAT_KAFKA_CONSUMER_GROUP_ID:seat-service-group}
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
       properties:
         spring.json.trusted.packages: com.triquang.message
+
+kafka:
+  topics:
+    flight-instance-created: ${KAFKA_TOPIC_FLIGHT_INSTANCE_CREATED:flight-instance-created}
+    booking-confirmed: ${KAFKA_TOPIC_BOOKING_CONFIRMED:booking.confirmed}

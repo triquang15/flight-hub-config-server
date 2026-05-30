@@ -7,3 +7,76 @@ spring:
     username: ${NOTIFICATION_DATASOURCE_USERNAME:${FLIGHTHUB_DATASOURCE_USERNAME}}
     password: ${NOTIFICATION_DATASOURCE_PASSWORD:${FLIGHTHUB_DATASOURCE_PASSWORD}}
     driver-class-name: ${NOTIFICATION_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+
+  data:
+    redis:
+      host: ${NOTIFICATION_REDIS_HOST:${SPRING_DATA_REDIS_HOST:localhost}}
+      port: ${NOTIFICATION_REDIS_PORT:${SPRING_DATA_REDIS_PORT:6379}}
+      timeout: 5000ms
+
+  kafka:
+    bootstrap-servers: ${NOTIFICATION_KAFKA_BOOTSTRAP_SERVERS:${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}}
+    consumer:
+      group-id: ${NOTIFICATION_KAFKA_CONSUMER_GROUP_ID:notification-service-group}
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.triquang.message
+        spring.json.use.type.headers: true
+        max.poll.interval.ms: 300000
+        session.timeout.ms: 15000
+    producer:
+      acks: all
+      retries: 3
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    listener:
+      ack-mode: record
+      concurrency: ${NOTIFICATION_KAFKA_LISTENER_CONCURRENCY:3}
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_APP_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+        debug: ${MAIL_DEBUG:false}
+
+twilio:
+  account-sid: ${TWILIO_ACCOUNT_SID:}
+  auth-token: ${TWILIO_AUTH_TOKEN:}
+  from-number: ${TWILIO_FROM_NUMBER:}
+  enabled: ${TWILIO_ENABLED:false}
+
+notification:
+  from-email: ${MAIL_FROM:flight_hub@gmail.com}
+  from-name: ${NOTIFICATION_FROM_NAME:Flight Hub Notifications}
+  support-email: ${MAIL_FROM:flight_hub@gmail.com}
+  support-phone: ${NOTIFICATION_SUPPORT_PHONE:1800-123-5678}
+  frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:3000}
+  password-reset-url: ${PASSWORD_RESET_URL:${notification.frontend-base-url}/reset-password}
+  checkin-url: ${NOTIFICATION_CHECKIN_URL:${notification.frontend-base-url}/checkin}
+  manage-booking-url: ${NOTIFICATION_MANAGE_BOOKING_URL:${notification.frontend-base-url}/booking}
+  idempotency:
+    retention-seconds: ${NOTIFICATION_IDEMPOTENCY_RETENTION_SECONDS:86400}
+    processing-lock-seconds: ${NOTIFICATION_IDEMPOTENCY_LOCK_SECONDS:300}
+
+kafka:
+  topics:
+    booking-confirmed: ${KAFKA_TOPIC_BOOKING_CONFIRMED:booking.confirmed}
+    password-reset-requested: ${KAFKA_TOPIC_PASSWORD_RESET_REQUESTED:user.password-reset-requested}
+    suspicious-login: ${KAFKA_TOPIC_SUSPICIOUS_LOGIN:security.suspicious-login}
+    suspicious-login-dlq: ${KAFKA_TOPIC_SUSPICIOUS_LOGIN_DLQ:security.suspicious-login.DLQ}
+  groups:
+    notification-dlq: ${NOTIFICATION_KAFKA_DLQ_GROUP_ID:notification-dlq-group}

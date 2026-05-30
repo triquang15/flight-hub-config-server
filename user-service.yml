@@ -7,3 +7,22 @@ spring:
     username: ${USER_DATASOURCE_USERNAME:${FLIGHTHUB_DATASOURCE_USERNAME}}
     password: ${USER_DATASOURCE_PASSWORD:${FLIGHTHUB_DATASOURCE_PASSWORD}}
     driver-class-name: ${USER_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+
+  kafka:
+    bootstrap-servers: ${USER_KAFKA_BOOTSTRAP_SERVERS:${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}}
+    producer:
+      acks: all
+      retries: 3
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: true
+        delivery.timeout.ms: 120000
+        request.timeout.ms: 30000
+        linger.ms: 5
+        batch.size: 16384
+
+kafka:
+  topics:
+    suspicious-login: ${KAFKA_TOPIC_SUSPICIOUS_LOGIN:security.suspicious-login}
+    password-reset-requested: ${KAFKA_TOPIC_PASSWORD_RESET_REQUESTED:user.password-reset-requested}

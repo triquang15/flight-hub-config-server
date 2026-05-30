@@ -12,6 +12,8 @@ This repository should not contain production database credentials. Service YAML
 
 Use `.env.prod.example` as the template. Each service needs its own datasource URL, and all services can share `FLIGHTHUB_DATASOURCE_USERNAME` and `FLIGHTHUB_DATASOURCE_PASSWORD` when the same DB user is used.
 
+Kafka is configured per service in the related `*-service.yml`. By default every service uses `SPRING_KAFKA_BOOTSTRAP_SERVERS`; set `<SERVICE>_KAFKA_BOOTSTRAP_SERVERS` only when one service needs a different broker.
+
 Per-service credentials are also supported:
 
 ```bash
