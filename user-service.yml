@@ -3,8 +3,7 @@ server:
 
 spring:
   datasource:
-    # NEON POSTGRESQL (PRODUCTION / CLOUD)
-    url: jdbc:postgresql://ep-silent-darkness-aoh21u1p-pooler.c-2.ap-southeast-1.aws.neon.tech/airline_user_db?sslmode=require
-    username: neondb_owner
-    password: npg_FDqZpbe3Oml7
-    driver-class-name: org.postgresql.Driver
+    url: ${USER_DATASOURCE_URL}
+    username: ${USER_DATASOURCE_USERNAME:${FLIGHTHUB_DATASOURCE_USERNAME}}
+    password: ${USER_DATASOURCE_PASSWORD:${FLIGHTHUB_DATASOURCE_PASSWORD}}
+    driver-class-name: ${USER_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
