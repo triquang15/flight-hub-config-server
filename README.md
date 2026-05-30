@@ -2,6 +2,18 @@
 
 This repository should not contain production database credentials. Service YAML files use Spring placeholders, and the running service resolves them from environment variables or platform secrets.
 
+## Local Development
+
+The default config is local-friendly. If services are started from Eclipse/STS on the host machine, they can run without manually copying `.env.local` into every Run Configuration:
+
+- PostgreSQL: `localhost:5432`, user `postgres`, password `12345678`
+- Kafka: `localhost:9092`
+- Redis: `localhost:6379`
+- JPA: `ddl-auto=update`
+- SQL logging: enabled
+
+Use `.env.local` only when you want a single visible list of the shared local defaults or when you prefer to source/export values in a terminal.
+
 ## Production Secret Flow
 
 1. Store real values in your deploy platform secret manager, for example Docker Compose `.env`, Kubernetes `Secret`, Render/Railway/Fly/EC2 environment variables, or Vault.

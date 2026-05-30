@@ -10,13 +10,13 @@ eureka:
 spring:
   jpa:
     hibernate:
-      ddl-auto: ${JPA_DDL_AUTO:validate}
-    show-sql: ${JPA_SHOW_SQL:false}
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    show-sql: ${JPA_SHOW_SQL:true}
     properties:
       hibernate:
-        format_sql: ${JPA_FORMAT_SQL:false}
+        format_sql: ${JPA_FORMAT_SQL:true}
 
 logging:
   level:
-    org.hibernate.SQL: ${HIBERNATE_SQL_LOG_LEVEL:WARN}
-    org.hibernate.orm.jdbc.bind: ${HIBERNATE_BIND_LOG_LEVEL:WARN}
+    org.hibernate.SQL: ${HIBERNATE_SQL_LOG_LEVEL:DEBUG}
+    org.hibernate.orm.jdbc.bind: ${HIBERNATE_BIND_LOG_LEVEL:TRACE}

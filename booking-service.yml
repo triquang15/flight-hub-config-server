@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: ${BOOKING_DATASOURCE_URL}
-    username: ${BOOKING_DATASOURCE_USERNAME:${FLIGHTHUB_DATASOURCE_USERNAME}}
-    password: ${BOOKING_DATASOURCE_PASSWORD:${FLIGHTHUB_DATASOURCE_PASSWORD}}
+    url: ${BOOKING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/airline_booking_db}
+    username: ${BOOKING_DATASOURCE_USERNAME:${FLIGHTHUB_DATASOURCE_USERNAME:postgres}}
+    password: ${BOOKING_DATASOURCE_PASSWORD:${FLIGHTHUB_DATASOURCE_PASSWORD:12345678}}
     driver-class-name: ${BOOKING_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
 
   kafka:
