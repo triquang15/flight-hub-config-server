@@ -39,7 +39,7 @@ spring:
   mail:
     host: ${MAIL_HOST:smtp.gmail.com}
     port: ${MAIL_PORT:587}
-    username: ${MAIL_USERNAME:}
+    username: ${MAIL_USERNAME:flight.hub015@gmail.com}
     password: ${MAIL_APP_PASSWORD:}
     properties:
       mail:
@@ -60,11 +60,11 @@ twilio:
   enabled: ${TWILIO_ENABLED:false}
 
 notification:
-  from-email: ${MAIL_FROM:flight_hub@gmail.com}
+  from-email: ${MAIL_FROM:flight.hub015@gmail.com}
   from-name: ${NOTIFICATION_FROM_NAME:Flight Hub Notifications}
-  support-email: ${MAIL_FROM:flight_hub@gmail.com}
+  support-email: ${MAIL_FROM:flight.hub015@gmail.com}
   support-phone: ${NOTIFICATION_SUPPORT_PHONE:1800-123-5678}
-  frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:3000}
+  frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:5173}
   password-reset-url: ${PASSWORD_RESET_URL:${notification.frontend-base-url}/reset-password}
   checkin-url: ${NOTIFICATION_CHECKIN_URL:${notification.frontend-base-url}/checkin}
   manage-booking-url: ${NOTIFICATION_MANAGE_BOOKING_URL:${notification.frontend-base-url}/booking}
