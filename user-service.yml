@@ -26,3 +26,10 @@ kafka:
   topics:
     suspicious-login: ${KAFKA_TOPIC_SUSPICIOUS_LOGIN:security.suspicious-login}
     password-reset-requested: ${KAFKA_TOPIC_PASSWORD_RESET_REQUESTED:user.password-reset-requested}
+
+app:
+  oauth:
+    google:
+      client-id: ${GOOGLE_CLIENT_ID:}
+    apple:
+      client-id: ${APPLE_CLIENT_ID:}
