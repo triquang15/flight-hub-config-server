@@ -6,6 +6,17 @@ server:
   port: 8080
 
 spring:
+  data:
+    redis:
+      host: ${API_GATEWAY_REDIS_HOST:${SPRING_DATA_REDIS_HOST:localhost}}
+      port: ${API_GATEWAY_REDIS_PORT:${SPRING_DATA_REDIS_PORT:6379}}
+      timeout: ${API_GATEWAY_REDIS_TIMEOUT:2000ms}
+      lettuce:
+        pool:
+          max-active: ${API_GATEWAY_REDIS_POOL_MAX_ACTIVE:16}
+          max-idle: ${API_GATEWAY_REDIS_POOL_MAX_IDLE:8}
+          min-idle: ${API_GATEWAY_REDIS_POOL_MIN_IDLE:2}
+
   cloud:
     gateway:
       globalcors:
@@ -27,3 +38,13 @@ spring:
 
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+
+app:
+  rate-limit:
+    capacity: ${GATEWAY_RATE_LIMIT_CAPACITY:120}
+    window-seconds: ${GATEWAY_RATE_LIMIT_WINDOW_SECONDS:60}
+    auth-capacity: ${GATEWAY_AUTH_RATE_LIMIT_CAPACITY:12}
+    auth-window-seconds: ${GATEWAY_AUTH_RATE_LIMIT_WINDOW_SECONDS:60}
+    fail-open: ${GATEWAY_RATE_LIMIT_FAIL_OPEN:false}
+  token-blacklist:
+    fail-open: ${GATEWAY_TOKEN_BLACKLIST_FAIL_OPEN:false}

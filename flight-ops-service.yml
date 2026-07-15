@@ -7,6 +7,18 @@ spring:
     username: ${FLIGHT_OPS_DATASOURCE_USERNAME:${FLIGHTHUB_DATASOURCE_USERNAME:postgres}}
     password: ${FLIGHT_OPS_DATASOURCE_PASSWORD:${FLIGHTHUB_DATASOURCE_PASSWORD:12345678}}
     driver-class-name: ${FLIGHT_OPS_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+  data:
+    redis:
+      host: ${FLIGHT_OPS_REDIS_HOST:${SPRING_DATA_REDIS_HOST:localhost}}
+      port: ${FLIGHT_OPS_REDIS_PORT:${SPRING_DATA_REDIS_PORT:6379}}
+      timeout: ${FLIGHT_OPS_REDIS_TIMEOUT:2000ms}
+      lettuce:
+        pool:
+          max-active: ${FLIGHT_OPS_REDIS_POOL_MAX_ACTIVE:8}
+          max-idle: ${FLIGHT_OPS_REDIS_POOL_MAX_IDLE:4}
+          min-idle: ${FLIGHT_OPS_REDIS_POOL_MIN_IDLE:1}
+  cache:
+    type: redis
 
   kafka:
     bootstrap-servers: ${FLIGHT_OPS_KAFKA_BOOTSTRAP_SERVERS:${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}}

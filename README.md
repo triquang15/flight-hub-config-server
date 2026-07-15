@@ -71,8 +71,21 @@ FLIGHTHUB_DATASOURCE_USERNAME=...
 FLIGHTHUB_DATASOURCE_PASSWORD=...
 EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=...
 SPRING_KAFKA_BOOTSTRAP_SERVERS=...
+SPRING_DATA_REDIS_HOST=...
+SPRING_DATA_REDIS_PORT=6379
 JPA_DDL_AUTO=validate
 ```
+
+Redis is used intentionally for:
+
+- API Gateway rate limiting and access-token blacklist.
+- Airline, Location, Pricing, and Flight Ops read-through caches.
+- Notification idempotency and in-flight duplicate suppression.
+
+Gateway token blacklist defaults to fail-closed in production
+(`GATEWAY_TOKEN_BLACKLIST_FAIL_OPEN=false`) so revoked access tokens are not
+accepted when Redis is unavailable. Rate limiting also defaults to fail-closed;
+set `GATEWAY_RATE_LIMIT_FAIL_OPEN=true` only for local troubleshooting.
 
 Service-specific datasource variables override the shared credentials when set:
 
