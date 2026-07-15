@@ -26,6 +26,10 @@ Use `.env.prod.example` as the template. Each service needs its own datasource U
 
 Kafka is configured per service in the related `*-service.yml`. By default every service uses `SPRING_KAFKA_BOOTSTRAP_SERVERS`; set `<SERVICE>_KAFKA_BOOTSTRAP_SERVERS` only when one service needs a different broker.
 
+File uploads are centralized through `media-service`. Services that upload
+business assets call it with `MEDIA_SERVICE_BASE_URL`; by default local
+development uses `http://localhost:8089`.
+
 Per-service credentials are also supported:
 
 ```bash

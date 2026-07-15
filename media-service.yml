@@ -1,0 +1,15 @@
+server:
+  port: 8089
+
+spring:
+  datasource:
+    url: ${MEDIA_DATASOURCE_URL:jdbc:postgresql://localhost:5441/media_service_db}
+    username: ${MEDIA_DATASOURCE_USERNAME:${FLIGHTHUB_DATASOURCE_USERNAME:postgres}}
+    password: ${MEDIA_DATASOURCE_PASSWORD:${FLIGHTHUB_DATASOURCE_PASSWORD:12345678}}
+    driver-class-name: ${MEDIA_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+
+app:
+  media:
+    storage-path: ${MEDIA_STORAGE_PATH:uploads/media}
+    public-base-url: ${MEDIA_PUBLIC_BASE_URL:http://localhost:8080}
+    max-file-size-bytes: ${MEDIA_MAX_FILE_SIZE_BYTES:5242880}

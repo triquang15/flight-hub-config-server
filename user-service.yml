@@ -28,6 +28,8 @@ kafka:
     password-reset-requested: ${KAFKA_TOPIC_PASSWORD_RESET_REQUESTED:user.password-reset-requested}
 
 app:
+  media-service:
+    base-url: ${MEDIA_SERVICE_BASE_URL:http://localhost:8089}
   oauth:
     google:
       client-id: ${GOOGLE_CLIENT_ID:}
