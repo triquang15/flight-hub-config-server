@@ -12,4 +12,4 @@ app:
   media:
     storage-path: ${MEDIA_STORAGE_PATH:uploads/media}
     public-base-url: ${MEDIA_PUBLIC_BASE_URL:http://localhost:8080}
-    max-file-size-bytes: ${MEDIA_MAX_FILE_SIZE_BYTES:5242880}
+    max-file-size-bytes: ${MEDIA_MAX_FILE_SIZE_BYTES:8388608}
