@@ -38,3 +38,4 @@ spring:
 kafka:
   topics:
     flight-instance-created: ${KAFKA_TOPIC_FLIGHT_INSTANCE_CREATED:flight-instance-created}
+    flight-schedule-changed: ${KAFKA_TOPIC_FLIGHT_SCHEDULE_CHANGED:flight.schedule-changed}

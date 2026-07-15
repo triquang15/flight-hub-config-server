@@ -41,6 +41,14 @@ kafka:
     payment-failed: ${KAFKA_TOPIC_PAYMENT_FAILED:payment.failed}
     payment-refunded: ${KAFKA_TOPIC_PAYMENT_REFUNDED:payment.refunded}
     booking-confirmed: ${KAFKA_TOPIC_BOOKING_CONFIRMED:booking.confirmed}
+    payment-failed-notification: ${KAFKA_TOPIC_PAYMENT_FAILED_NOTIFICATION:payment.failed.notification}
+    booking-refunded-notification: ${KAFKA_TOPIC_BOOKING_REFUNDED_NOTIFICATION:booking.refunded.notification}
+    ticket-issued: ${KAFKA_TOPIC_TICKET_ISSUED:booking.ticket-issued}
+    flight-schedule-changed: ${KAFKA_TOPIC_FLIGHT_SCHEDULE_CHANGED:flight.schedule-changed}
+    flight-schedule-changed-notification: ${KAFKA_TOPIC_FLIGHT_SCHEDULE_CHANGED_NOTIFICATION:flight.schedule-changed.notification}
     payment-completed-dlq: ${KAFKA_TOPIC_PAYMENT_COMPLETED_DLQ:payment.completed.DLQ}
     payment-failed-dlq: ${KAFKA_TOPIC_PAYMENT_FAILED_DLQ:payment.failed.DLQ}
     payment-refunded-dlq: ${KAFKA_TOPIC_PAYMENT_REFUNDED_DLQ:payment.refunded.DLQ}
+
+notification:
+  frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:5173}

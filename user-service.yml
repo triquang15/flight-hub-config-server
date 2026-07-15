@@ -28,8 +28,10 @@ kafka:
   topics:
     suspicious-login: ${KAFKA_TOPIC_SUSPICIOUS_LOGIN:security.suspicious-login}
     password-reset-requested: ${KAFKA_TOPIC_PASSWORD_RESET_REQUESTED:user.password-reset-requested}
+    admin-user-provisioned: ${KAFKA_TOPIC_ADMIN_USER_PROVISIONED:user.admin-provisioned}
 
 app:
+  frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:5173}
   media-service:
     base-url: ${MEDIA_SERVICE_BASE_URL:http://localhost:8089}
   oauth:

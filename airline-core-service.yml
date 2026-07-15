@@ -20,6 +20,27 @@ spring:
   cache:
     type: redis
 
+  kafka:
+    bootstrap-servers: ${AIRLINE_CORE_KAFKA_BOOTSTRAP_SERVERS:${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}}
+    producer:
+      acks: all
+      retries: 3
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 5
+        spring.json.add.type.headers: true
+        delivery.timeout.ms: 120000
+        request.timeout.ms: 30000
+        linger.ms: 5
+        batch.size: 16384
+
 app:
+  frontend-base-url: ${FRONTEND_BASE_URL:http://localhost:5173}
   media-service:
     base-url: ${MEDIA_SERVICE_BASE_URL:http://localhost:8089}
+
+kafka:
+  topics:
+    airline-onboarding-decision: ${KAFKA_TOPIC_AIRLINE_ONBOARDING_DECISION:airline.onboarding-decision}
