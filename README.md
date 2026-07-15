@@ -87,6 +87,18 @@ Gateway token blacklist defaults to fail-closed in production
 accepted when Redis is unavailable. Rate limiting also defaults to fail-closed;
 set `GATEWAY_RATE_LIMIT_FAIL_OPEN=true` only for local troubleshooting.
 
+Kafka is used intentionally for cross-service events:
+
+- Payment lifecycle events from Payment Service to Booking Service.
+- Booking confirmation events to Notification and Seat Service.
+- Flight instance creation events to Seat Service for inventory generation.
+- Password reset and suspicious login security notifications.
+
+Kafka producers use `acks=all`, retries, idempotence, and stable event keys for
+per-aggregate ordering. Kafka consumers use record-level acking, auto-commit is
+disabled, and failed records are retried before being published to `.DLQ`
+topics.
+
 Service-specific datasource variables override the shared credentials when set:
 
 ```bash
