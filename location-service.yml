@@ -7,3 +7,7 @@ spring:
     username: ${LOCATION_DATASOURCE_USERNAME:${FLIGHTHUB_DATASOURCE_USERNAME:postgres}}
     password: ${LOCATION_DATASOURCE_PASSWORD:${FLIGHTHUB_DATASOURCE_PASSWORD:12345678}}
     driver-class-name: ${LOCATION_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+
+app:
+  media-service:
+    base-url: ${MEDIA_SERVICE_BASE_URL:http://localhost:8089}
