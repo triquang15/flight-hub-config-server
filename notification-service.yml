@@ -7,6 +7,8 @@ spring:
     username: ${NOTIFICATION_DATASOURCE_USERNAME:${FLIGHTHUB_DATASOURCE_USERNAME:postgres}}
     password: ${NOTIFICATION_DATASOURCE_PASSWORD:${FLIGHTHUB_DATASOURCE_PASSWORD:12345678}}
     driver-class-name: ${NOTIFICATION_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+  jpa:
+    open-in-view: false
 
   data:
     redis:
@@ -26,8 +28,9 @@ spring:
       auto-offset-reset: earliest
       enable-auto-commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
         spring.json.trusted.packages: com.triquang.message
         spring.json.use.type.headers: true
         max.poll.interval.ms: 300000
@@ -80,6 +83,9 @@ notification:
   password-reset-url: ${PASSWORD_RESET_URL:${notification.frontend-base-url}/reset-password}
   checkin-url: ${NOTIFICATION_CHECKIN_URL:${notification.frontend-base-url}/checkin}
   manage-booking-url: ${NOTIFICATION_MANAGE_BOOKING_URL:${notification.frontend-base-url}/booking}
+  kafka:
+    listener:
+      auto-startup: ${NOTIFICATION_KAFKA_LISTENER_AUTO_STARTUP:true}
   idempotency:
     retention-seconds: ${NOTIFICATION_IDEMPOTENCY_RETENTION_SECONDS:86400}
     processing-lock-seconds: ${NOTIFICATION_IDEMPOTENCY_LOCK_SECONDS:300}
